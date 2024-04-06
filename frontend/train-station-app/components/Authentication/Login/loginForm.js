@@ -1,14 +1,19 @@
 'use client'
+
 import { useState } from "react";
 
 import { emailValidator, passwordValidator } from "@/utils/validators.js";
 import useInput from "@/hooks/use-unput.js";
 
 import logo from "@/public/logo.png";
-// import logo from "../../../public/logo.png";
-import classes from "./loginForm.module.css";
+import classes from "./loginForm.module.scss";
 
-const LoginForm = () => {
+/**
+ * 
+ * @param {() => void} props.switchForm
+ * @returns {ReactElement}
+ */
+const LoginForm = (props) => {
   let formValid = true;
 
   const {
@@ -38,10 +43,6 @@ const LoginForm = () => {
 
   function loginFormHandler(e) {
     console.log('yo');
-  }
-
-  function showRegisterFormHandler() {
-    console.log('here');
   }
 
   return (
@@ -97,7 +98,7 @@ const LoginForm = () => {
       <div className={classes.textContainer}>
         <span>Don’t have an account?</span>
         <button
-          onClick={showRegisterFormHandler}
+          onClick={props.switchForm}
           className={classes.signUpButton}
         >
           Sign up
