@@ -1,13 +1,19 @@
 'use client'
 
+import { useState } from "react";
 
+import { emailValidator, passwordValidator, passwordsMatch } from "@/utils/validators.js";
 import useInput from "@/hooks/use-unput.js";
 
-import logo from "../Icons/logo.png";
-import classes from "@/components/authentication/Register/registerForm.module.css";
-import { emailValidator, passwordValidator } from "@/utils/validators.js";
+import logo from "@/public/logo.png";
+import classes from "./registerForm.module.scss";
 
-const RegisterForm = () => {
+/**
+ * 
+ * @param {() => void} props.switchForm 
+ * @returns {ReactElement}
+ */
+const RegisterForm = (props) => {
   let formValid = true;
 
   const {
@@ -34,20 +40,27 @@ const RegisterForm = () => {
     inputOnBlurHandler: repeatedPasswordOnBlurHandler,
     reset: resetRepeatedPassword,
   } = useInput(passwordsMatch.bind(null, enteredPassword));
+
   if (!isEmailValid || !isPasswordValid || !isRepeatedPasswordValid) {
     formValid = false;
   } else {
     formValid = true;
   }
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  function registerFormHandler() {
+    console.log('yo');
+  }
+
   return (
     <>
-      {error && <span className={classes.errorTopMessage}>{error}</span>}
+      {/* {error && <span className={classes.errorTopMessage}>{error}</span>} */}
       <div className={classes.logoContainer}>
         <label>Register</label>
         <img className={classes.logoImg} src={logo} alt="" />
       </div>
-      <form onSubmit={registeFormHandler} className={classes.loginForm}>
+      <form onSubmit={registerFormHandler} className={classes.loginForm}>
         <div className={classes.group}>
           <input
             autoComplete="email"
@@ -113,7 +126,7 @@ const RegisterForm = () => {
         </div>
         <button
           disabled={!formValid}
-          onClick={registeFormHandler}
+          onClick={registerFormHandler}
           className={classes.button}
         >
           {isLoading ? "loading..." : "Register"}
@@ -121,7 +134,7 @@ const RegisterForm = () => {
       </form>
       <div className={classes.textContainer}>
         <span>Already have an account?</span>
-        <button onClick={showLoginFormHandler} className={classes.signUpButton}>
+        <button onClick={props.switchForm} className={classes.signUpButton}>
           Login
         </button>
       </div>
