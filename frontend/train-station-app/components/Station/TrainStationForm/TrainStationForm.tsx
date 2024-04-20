@@ -15,9 +15,7 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
   const [stationTo, setStationTo] = useState("");
   const [departureTime, setDepartireTime] = useState("");
   const [arrivalTime, setArrivalTime] = useState("");
-  const [typeOfTravel, setTypeOfTravel] = useState(
-    searchFields.typesOfTravel[0]
-  );
+  const [typeOfTravel, setTypeOfTravel] = useState("");
 
   useEffect(() => {
     if (stationFrom || (stationTo && searchFields)) {
@@ -80,10 +78,11 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
         />
         <Select
           onChange={() => {}}
-          value={1}
+          value={typeOfTravel}
           options={["asd", "csc"]}
           label="Оne-way/Тwо-way train"
           className={classes["input-5"]}
+          defaultMessage="Choose way of travel"
         />
       </form>
     </section>
