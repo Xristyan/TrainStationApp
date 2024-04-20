@@ -1,19 +1,23 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { emailValidator, passwordValidator } from "@/utils/validators";
-import useInput from "@/hooks/use-input";
-import Image from "next/image";
-import logo from "@/public/logo.png";
-import classes from "./loginForm.module.scss";
+import { emailValidator, passwordValidator } from '@/utils/validators';
+import useInput from '@/hooks/use-input';
+import Image from 'next/image';
+import logo from '@/public/logo.png';
+import classes from './loginForm.module.scss';
+
+import { useDispatch } from 'react-redux';
 
 /**
  *
  * @param {() => void} props.switchForm
  * @returns {ReactElement}
  */
-const LoginForm = (props) => {
+const LoginForm = (props: any) => {
+  const dispatch = useDispatch();
+
   let formValid = true;
 
   const {
@@ -22,7 +26,7 @@ const LoginForm = (props) => {
     hasError: emailHasError,
     valueChangeHandler: emailChangeHandler,
     inputOnBlurHandler: emailOnBlurHandler,
-    reset: resetEmail,
+    reset: resetEmail
   } = useInput(emailValidator);
   const {
     value: enteredPassword,
@@ -30,7 +34,7 @@ const LoginForm = (props) => {
     hasError: passwordHasError,
     valueChangeHandler: passwordChangeHandler,
     inputOnBlurHandler: passwordOnBlurHandler,
-    reset: resetPassword,
+    reset: resetPassword
   } = useInput(passwordValidator);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -41,8 +45,8 @@ const LoginForm = (props) => {
     formValid = true;
   }
 
-  function loginFormHandler(e) {
-    console.log("yo");
+  function loginFormHandler(e: any) {
+    console.log('yo');
   }
 
   return (
@@ -53,7 +57,7 @@ const LoginForm = (props) => {
         <Image
           className={classes.logoImg}
           src={logo}
-          alt=""
+          alt=''
           width={70}
           height={70}
         />
@@ -61,15 +65,15 @@ const LoginForm = (props) => {
       <form onSubmit={loginFormHandler} className={classes.loginForm}>
         <div className={classes.group}>
           <input
-            autoComplete="email"
+            autoComplete='email'
             onChange={emailChangeHandler}
             onBlur={emailOnBlurHandler}
             required={true}
-            type="email"
+            type='email'
             className={`${classes.input} ${
-              classes[emailHasError ? "invalid" : ""]
+              classes[emailHasError ? 'invalid' : '']
             }`}
-            placeholder="Email"
+            placeholder='Email'
             value={enteredEmail}
           />
           <span className={classes.bar}></span>
@@ -79,13 +83,13 @@ const LoginForm = (props) => {
         </div>
         <div className={classes.group}>
           <input
-            autoComplete="current-password"
+            autoComplete='current-password'
             required={true}
-            type="password"
+            type='password'
             className={`${classes.input} ${
-              classes[passwordHasError ? "invalid" : ""]
+              classes[passwordHasError ? 'invalid' : '']
             }`}
-            placeholder="Password"
+            placeholder='Password'
             value={enteredPassword}
             onChange={passwordChangeHandler}
             onBlur={passwordOnBlurHandler}
@@ -100,7 +104,7 @@ const LoginForm = (props) => {
           onClick={loginFormHandler}
           className={classes.button}
         >
-          {isLoading ? "loading..." : "Login"}
+          {isLoading ? 'loading...' : 'Login'}
         </button>
       </form>
       <div className={classes.textContainer}>
