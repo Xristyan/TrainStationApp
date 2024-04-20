@@ -1,6 +1,6 @@
 package com.example.TrainStation.auth;
 
-import com.StoreProject.store.Exception.BadCredentialsException;
+import com.example.TrainStation.Exception.BadCredentialsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

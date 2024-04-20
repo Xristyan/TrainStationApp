@@ -1,14 +1,15 @@
 package com.example.TrainStation.auth;
 
-import com.StoreProject.store.Exception.BadCredentialsException;
-import com.StoreProject.store.Exception.NotFoundException;
-import com.StoreProject.store.Exception.UserAlreadyRegisteredException;
-import com.StoreProject.store.config.JwtService;
-import com.StoreProject.store.model.Role;
-import com.StoreProject.store.model.User;
-import com.StoreProject.store.repository.UserRepository;
+
+import com.example.TrainStation.Exception.NotFoundException;
+import com.example.TrainStation.Exception.UserAlreadyRegisteredException;
+import com.example.TrainStation.Model.Role;
+import com.example.TrainStation.Model.User;
+import com.example.TrainStation.Repository.UserRepository;
+import com.example.TrainStation.config.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,7 +35,6 @@ public class AuthenticationService {
             .email(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
             .role(role)
-            .address(request.getAddress())
             .cart(request.getCart())
             .build();
    repository.save(user);

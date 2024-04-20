@@ -1,6 +1,7 @@
 package com.example.TrainStation.Model;
 
-public enum Role {
+public enum Role
+{
     ADMIN,
     USER
 }

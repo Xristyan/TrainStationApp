@@ -1,7 +1,8 @@
 package com.example.TrainStation.config;
 
 
-import com.StoreProject.store.repository.UserRepository;
+
+import com.example.TrainStation.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
