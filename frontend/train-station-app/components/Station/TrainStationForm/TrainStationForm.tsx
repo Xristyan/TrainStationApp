@@ -3,6 +3,7 @@ import React, { FC, useEffect, useState } from "react";
 import classes from "@styles/trainStation/_station-form.module.scss";
 import { Select } from "@/components/common/Select";
 import { Input } from "@/components/common/Input";
+import useHttp from "@/hooks/use-http";
 
 type TrainStationFormProps = {
   searchFields: any;
@@ -17,10 +18,12 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
   const [arrivalTime, setArrivalTime] = useState("");
   const [typeOfTravel, setTypeOfTravel] = useState("");
 
+  const { isLoading, error, requestHandler } = useHttp();
+
   useEffect(() => {
-    if (stationFrom || (stationTo && searchFields)) {
+    if (stationFrom || stationTo) {
     }
-  }, [searchFields]);
+  }, []);
 
   const filterStationsFieldsHandler = (valueToExclude: string) => {
     if (valueToExclude) {
@@ -77,9 +80,11 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
           className={classes["input-4"]}
         />
         <Select
-          onChange={() => {}}
+          onChange={(e) => {
+            setTypeOfTravel(e.target.value);
+          }}
           value={typeOfTravel}
-          options={["asd", "csc"]}
+          options={searchFields ? searchFields.typesOfTravel : []}
           label="Оne-way/Тwо-way train"
           className={classes["input-5"]}
           defaultMessage="Choose way of travel"

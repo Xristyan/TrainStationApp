@@ -8,13 +8,16 @@ import { languages } from "@/i18n/settings";
 import { Select } from "../common/Select";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "@/i18n/client";
+import { useState } from "react";
 
 export const Header = ({ locale }) => {
+  console.log("asda", locale);
+  const [route, setRoute] = useState(locale);
   const router = useRouter();
-  // const { t } = useTranslation(locale, "translations");
 
   const languageChangeHandler = (e) => {
     console.log(e.target.value);
+    setRoute(e.target.value);
     router.push(`${e.target.value}`);
   };
   return (
@@ -31,7 +34,7 @@ export const Header = ({ locale }) => {
           <div style={{ width: "5rem" }}>
             <Select
               onChange={languageChangeHandler}
-              value={locale}
+              value={route}
               options={languages}
             />
           </div>
