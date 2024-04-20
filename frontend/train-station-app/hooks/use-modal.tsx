@@ -1,10 +1,9 @@
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   openModal as openModalSlice,
   closeModal as closeModalSlice,
-  toggleModal as toggleModalSlice
-} from '@/redux/modal/modalSlice';
-import { AppDispatch } from '@/redux/store';
+  toggleModal as toggleModalSlice,
+} from "@/redux/modal/modalSlice";
 
 export default function useModal() {
   const dispatch = useAppDispatch();
