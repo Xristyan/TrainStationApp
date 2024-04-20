@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Image from "next/image";
+import { useState } from 'react';
+import Image from 'next/image';
 import {
   emailValidator,
   passwordValidator,
-  passwordsMatch,
-} from "@/utils/validators";
-import useInput from "@/hooks/use-input";
+  passwordsMatch
+} from '@/utils/validators';
+import useInput from '@/hooks/use-input';
 
-import logo from "@/public/logo.png";
-import classes from "./registerForm.module.scss";
+import logo from '@/public/logo.png';
+import classes from './registerForm.module.scss';
 
 /**
  *
  * @param {() => void} props.switchForm
  * @returns {ReactElement}
  */
-const RegisterForm = (props) => {
+const RegisterForm = (props: any) => {
   let formValid = true;
 
   const {
@@ -26,7 +26,7 @@ const RegisterForm = (props) => {
     hasError: emailHasError,
     valueChangeHandler: emailChangeHandler,
     inputOnBlurHandler: emailOnBlurHandler,
-    reset: resetEmail,
+    reset: resetEmail
   } = useInput(emailValidator);
   const {
     value: enteredPassword,
@@ -34,7 +34,7 @@ const RegisterForm = (props) => {
     hasError: passwordHasError,
     valueChangeHandler: passwordChangeHandler,
     inputOnBlurHandler: passwordOnBlurHandler,
-    reset: resetPassword,
+    reset: resetPassword
   } = useInput(passwordValidator);
   const {
     value: enteredRepeatedPassword,
@@ -42,7 +42,7 @@ const RegisterForm = (props) => {
     hasError: repeatedPasswordHasError,
     valueChangeHandler: repeatedPasswordChangeHandler,
     inputOnBlurHandler: repeatedPasswordOnBlurHandler,
-    reset: resetRepeatedPassword,
+    reset: resetRepeatedPassword
   } = useInput(passwordsMatch.bind(null, enteredPassword));
 
   if (!isEmailValid || !isPasswordValid || !isRepeatedPasswordValid) {
@@ -54,7 +54,7 @@ const RegisterForm = (props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   function registerFormHandler() {
-    console.log("yo");
+    console.log('yo');
   }
 
   return (
@@ -65,7 +65,7 @@ const RegisterForm = (props) => {
         <Image
           className={classes.logoImg}
           src={logo}
-          alt=""
+          alt=''
           width={70}
           height={70}
         />
@@ -73,16 +73,16 @@ const RegisterForm = (props) => {
       <form onSubmit={registerFormHandler} className={classes.loginForm}>
         <div className={classes.group}>
           <input
-            autoComplete="email"
+            autoComplete='email'
             onChange={emailChangeHandler}
             onBlur={emailOnBlurHandler}
             value={enteredEmail}
             required={true}
-            type="email"
+            type='email'
             className={`${classes.input} ${
-              classes[emailHasError ? "invalid" : ""]
+              classes[emailHasError ? 'invalid' : '']
             }`}
-            placeholder="Email"
+            placeholder='Email'
           />
           <span className={classes.bar}></span>
           {emailHasError && (
@@ -92,15 +92,15 @@ const RegisterForm = (props) => {
 
         <div className={classes.group}>
           <input
-            autoComplete="current-password"
+            autoComplete='current-password'
             required={true}
-            type="password"
+            type='password'
             className={`${classes.input} ${
               classes[
-                passwordHasError || repeatedPasswordHasError ? "invalid" : ""
+                passwordHasError || repeatedPasswordHasError ? 'invalid' : ''
               ]
             }`}
-            placeholder="Password"
+            placeholder='Password'
             value={enteredPassword}
             onChange={passwordChangeHandler}
             onBlur={passwordOnBlurHandler}
@@ -119,13 +119,13 @@ const RegisterForm = (props) => {
         </div>
         <div className={classes.group}>
           <input
-            autoComplete="current-password"
-            required=""
-            type="password"
+            autoComplete='current-password'
+            required
+            type='password'
             className={`${classes.input} ${
-              classes[repeatedPasswordHasError ? "invalid" : ""]
+              classes[repeatedPasswordHasError ? 'invalid' : '']
             }`}
-            placeholder="Repeat-Password"
+            placeholder='Repeat-Password'
             value={enteredRepeatedPassword}
             onChange={repeatedPasswordChangeHandler}
             onBlur={repeatedPasswordOnBlurHandler}
@@ -142,7 +142,7 @@ const RegisterForm = (props) => {
           onClick={registerFormHandler}
           className={classes.button}
         >
-          {isLoading ? "loading..." : "Register"}
+          {isLoading ? 'loading...' : 'Register'}
         </button>
       </form>
       <div className={classes.textContainer}>
