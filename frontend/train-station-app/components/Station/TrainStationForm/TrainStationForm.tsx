@@ -11,12 +11,13 @@ type TrainStationFormProps = {
 export const TrainStationForm: FC<TrainStationFormProps> = ({
   searchFields,
 }) => {
-  // const [searchFields, setSearchFields] = useState(searchFieldsProp);
   const [stationFrom, setStationFrom] = useState("");
   const [stationTo, setStationTo] = useState("");
   const [departureTime, setDepartireTime] = useState("");
   const [arrivalTime, setArrivalTime] = useState("");
-  const [typeOfTravel, setTypeOfTravel] = useState("");
+  const [typeOfTravel, setTypeOfTravel] = useState(
+    searchFields.typesOfTravel[0]
+  );
 
   useEffect(() => {
     if (stationFrom || (stationTo && searchFields)) {
@@ -63,14 +64,18 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
           type="datetime-local"
           label="Departure Time"
           value={""}
-          onChange={() => {}}
+          onChange={(e) => {
+            setDepartireTime(e.target.value);
+          }}
           className={classes["input-3"]}
         />
         <Input
           type="datetime-local"
           label="Arrival Time"
           value={""}
-          onChange={() => {}}
+          onChange={(e) => {
+            setArrivalTime(e.target.value);
+          }}
           className={classes["input-4"]}
         />
         <Select
