@@ -1,24 +1,33 @@
 {
   "compilerOptions": {
-    "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
-    "checkJs": true,
     "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "incremental": true,
+    "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": "./",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
-      "@/*": ["*"],
-      "@styles/*": ["styles/*"]
-    },
-    "types": ["node", "react", "react-dom", "next"]
+      "@/*": ["./*"],
+      "@styles/*": ["./styles/*"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "components/icons/CartIcon"
+  ],
   "exclude": ["node_modules"]
 }

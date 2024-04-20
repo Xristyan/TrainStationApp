@@ -1,7 +1,9 @@
 package com.example.TrainStation.Controller;
 
 
+import com.example.TrainStation.Model.Museum;
 import com.example.TrainStation.Model.TrainStation;
+import com.example.TrainStation.Service.MuseumService;
 import com.example.TrainStation.Service.TrainStationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,6 @@ public class TrainStationController {
     @GetMapping("")
     public ResponseEntity<List<TrainStation>> getAllStations()
     {
-       return ResponseEntity.ok(trainStationService.getAllStations());
+        return ResponseEntity.ok(trainStationService.getAllStations());
     }
 }
