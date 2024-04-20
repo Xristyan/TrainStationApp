@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class FilterOptions {
 
-    private int stationFromId;
+    private String stationFromName;
 
-    private int stationToId;
+    private String stationToName;
 
     private LocalDateTime departureDateTime;
 

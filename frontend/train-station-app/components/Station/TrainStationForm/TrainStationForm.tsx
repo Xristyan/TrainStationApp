@@ -7,10 +7,12 @@ import useHttp from "@/hooks/use-http";
 
 type TrainStationFormProps = {
   searchFields: any;
+  searchFieldsHandler: any;
 };
 
 export const TrainStationForm: FC<TrainStationFormProps> = ({
   searchFields,
+  searchFieldsHandler,
 }) => {
   const [stationFrom, setStationFrom] = useState("");
   const [stationTo, setStationTo] = useState("");
@@ -18,12 +20,22 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
   const [arrivalTime, setArrivalTime] = useState("");
   const [typeOfTravel, setTypeOfTravel] = useState("");
 
-  const { isLoading, error, requestHandler } = useHttp();
-
   useEffect(() => {
-    if (stationFrom || stationTo) {
-    }
-  }, []);
+    searchFieldsHandler({
+      stationFrom,
+      stationTo,
+      departureTime,
+      arrivalTime,
+      typeOfTravel,
+    });
+  }, [
+    stationFrom,
+    stationTo,
+    departureTime,
+    arrivalTime,
+    typeOfTravel,
+    searchFieldsHandler,
+  ]);
 
   const filterStationsFieldsHandler = (valueToExclude: string) => {
     if (valueToExclude) {
@@ -64,7 +76,7 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
         <Input
           type="datetime-local"
           label="Departure Time"
-          value={""}
+          value={departureTime}
           onChange={(e) => {
             setDepartireTime(e.target.value);
           }}
@@ -73,7 +85,7 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
         <Input
           type="datetime-local"
           label="Arrival Time"
-          value={""}
+          value={arrivalTime}
           onChange={(e) => {
             setArrivalTime(e.target.value);
           }}

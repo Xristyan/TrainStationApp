@@ -17,8 +17,8 @@ public class ConnectionsServiceImpl implements ConnectionsService {
     public List<StationConnection> filterConnections(FilterOptions filterOptions) {
 //       return connectionsRepository.findAll();
         return connectionsRepository.findByFilterOptions(
-                filterOptions.getStationFromId(),
-                filterOptions.getStationToId(),
+                filterOptions.getStationFromName(),
+                filterOptions.getStationToName(),
                 filterOptions.getDepartureDateTime(),
                 filterOptions.getArrivalDateTime(),
                 filterOptions.getTypeOfTravel()

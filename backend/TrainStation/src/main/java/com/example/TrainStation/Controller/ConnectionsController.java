@@ -18,7 +18,7 @@ public class ConnectionsController {
     private ConnectionsService connectionsService;
 
     @CrossOrigin
-    @GetMapping("")
+    @PostMapping("")
     public ResponseEntity<List<StationConnection>> getAllStations( @RequestBody FilterOptions filterOptions)
     {
         return ResponseEntity.ok(connectionsService.filterConnections(filterOptions));
