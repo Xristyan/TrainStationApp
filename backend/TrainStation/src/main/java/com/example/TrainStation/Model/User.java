@@ -33,6 +33,9 @@ public class User implements UserDetails {
     @NotBlank
     @Size(min = 5)
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private  CardType card;
     @Enumerated(EnumType.STRING)
     private Role role;
 
