@@ -11,6 +11,7 @@ import useInput from '@/hooks/use-input';
 
 import logo from '@/public/logo.png';
 import classes from './registerForm.module.scss';
+import useAuth from '@/hooks/use-auth';
 
 /**
  *
@@ -44,6 +45,7 @@ const RegisterForm = (props: any) => {
     inputOnBlurHandler: repeatedPasswordOnBlurHandler,
     reset: resetRepeatedPassword
   } = useInput(passwordsMatch.bind(null, enteredPassword));
+  const { register } = useAuth();
 
   if (!isEmailValid || !isPasswordValid || !isRepeatedPasswordValid) {
     formValid = false;
@@ -53,8 +55,13 @@ const RegisterForm = (props: any) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  function registerFormHandler() {
-    console.log('yo');
+  function registerFormHandler(e: any) {
+    e.preventDefault();
+    if (enteredPassword != enteredRepeatedPassword) {
+      return;
+    }
+
+    register({ email: enteredEmail, password: enteredPassword });
   }
 
   return (
