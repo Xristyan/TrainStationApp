@@ -17,7 +17,12 @@ import RegisterForm from '../Authentication/Register/registerForm';
 import { useAppDispatch } from '@/redux/hooks';
 import { AppDispatch } from '@/redux/store';
 import useHttp from '@/hooks/use-http';
-import { setCart, setUserEmail, setUserId } from '@/redux/auth/authSlice';
+import {
+  setCart,
+  setUserCard,
+  setUserEmail,
+  setUserId
+} from '@/redux/auth/authSlice';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 
 export const Header = ({ locale }: { locale: Locale }) => {
@@ -49,7 +54,7 @@ export const Header = ({ locale }: { locale: Locale }) => {
         }
       },
       (data: any) => {
-        console.log(data);
+        dispatch(setUserCard(data.card));
         dispatch(setCart(data.cart));
         dispatch(setUserId(data.id));
         dispatch(setUserEmail(data.email));

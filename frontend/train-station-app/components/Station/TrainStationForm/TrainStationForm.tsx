@@ -1,8 +1,9 @@
-"use client";
-import React, { FC, useEffect, useState } from "react";
-import classes from "@styles/trainStation/_station-form.module.scss";
-import { Select } from "@/components/common/Select";
-import { Input } from "@/components/common/Input";
+'use client';
+import React, { FC, useEffect, useState } from 'react';
+import classes from '@styles/trainStation/_station-form.module.scss';
+import { Select } from '@/components/common/Select';
+import { Input } from '@/components/common/Input';
+import { useAppSelector } from '@/redux/hooks';
 
 type TrainStationFormProps = {
   searchFields: any;
@@ -11,15 +12,16 @@ type TrainStationFormProps = {
 
 export const TrainStationForm: FC<TrainStationFormProps> = ({
   searchFields,
-  searchFieldsHandler,
+  searchFieldsHandler
 }) => {
-  const [stationFrom, setStationFrom] = useState("");
-  const [stationTo, setStationTo] = useState("");
-  const [departureTime, setDepartireTime] = useState("");
-  const [arrivalTime, setArrivalTime] = useState("");
-  const [typeOfTravel, setTypeOfTravel] = useState("");
+  const [stationFrom, setStationFrom] = useState('');
+  const [stationTo, setStationTo] = useState('');
+  const [departureTime, setDepartireTime] = useState('');
+  const [arrivalTime, setArrivalTime] = useState('');
+  const [typeOfTravel, setTypeOfTravel] = useState('');
   const [hasChild, setHasChild] = useState(false);
   const [childAge, setChiledAge] = useState(0);
+  const card = useAppSelector((state) => state.authReducer.user.card);
 
   useEffect(() => {
     searchFieldsHandler({
@@ -30,6 +32,7 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
       typeOfTravel,
       hasChild,
       childAge,
+      card
     });
   }, [
     stationFrom,
@@ -40,6 +43,7 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
     hasChild,
     childAge,
     searchFieldsHandler,
+    card
   ]);
 
   const filterStationsFieldsHandler = (valueToExclude: string) => {
@@ -65,10 +69,10 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
           }}
           value={stationFrom}
           options={searchFields ? filterStationsFieldsHandler(stationTo) : []}
-          label="From"
-          className={classes["input-1"]}
+          label='From'
+          className={classes['input-1']}
           reqired
-          defaultMessage="Choose a station"
+          defaultMessage='Choose a station'
         />
         <Select
           onChange={(e) => {
@@ -76,28 +80,28 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
           }}
           value={stationTo}
           options={searchFields ? filterStationsFieldsHandler(stationFrom) : []}
-          label="To"
-          className={classes["input-2"]}
+          label='To'
+          className={classes['input-2']}
           reqired
-          defaultMessage="Choose a station"
+          defaultMessage='Choose a station'
         />
         <Input
-          type="datetime-local"
-          label="Departure Time"
+          type='datetime-local'
+          label='Departure Time'
           value={departureTime}
           onChange={(e) => {
             setDepartireTime(e.target.value);
           }}
-          className={classes["input-3"]}
+          className={classes['input-3']}
         />
         <Input
-          type="datetime-local"
-          label="Arrival Time"
+          type='datetime-local'
+          label='Arrival Time'
           value={arrivalTime}
           onChange={(e) => {
             setArrivalTime(e.target.value);
           }}
-          className={classes["input-4"]}
+          className={classes['input-4']}
         />
         <Select
           onChange={(e) => {
@@ -105,18 +109,18 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
           }}
           value={typeOfTravel}
           options={searchFields ? searchFields.typesOfTravel : []}
-          label="Оne-way/Тwо-way train"
-          className={classes["input-5"]}
-          defaultMessage="Choose way of travel"
+          label='Оne-way/Тwо-way train'
+          className={classes['input-5']}
+          defaultMessage='Choose way of travel'
         />
         <Input
-          type="checkbox"
-          label="With child"
+          type='checkbox'
+          label='With child'
           value={hasChild}
           onChange={(e) => {
             setHasChild(e.target.checked);
           }}
-          className={classes["input-6"]}
+          className={classes['input-6']}
         />
         {hasChild && (
           <Select
@@ -125,9 +129,9 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
             }}
             value={childAge}
             options={Array.from(Array(71).keys())}
-            label="Age"
-            className={classes["input-7"]}
-            defaultMessage="Age"
+            label='Age'
+            className={classes['input-7']}
+            defaultMessage='Age'
           />
         )}
       </form>

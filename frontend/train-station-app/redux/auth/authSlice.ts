@@ -6,6 +6,7 @@ type InitialState = {
     email: string;
     cart: Cart[];
     id: number | null;
+    card: string | null;
   };
 };
 
@@ -13,7 +14,8 @@ const initialState: InitialState = {
   user: {
     email: '',
     cart: [],
-    id: null
+    id: null,
+    card: null
   }
 };
 
@@ -26,9 +28,17 @@ export const auth = createSlice({
     },
     setUserCredentials: (
       state,
-      action: PayloadAction<{ email: string; cart: Cart[]; id: number }>
+      action: PayloadAction<{
+        email: string;
+        cart: Cart[];
+        id: number;
+        card: string;
+      }>
     ) => {
       state.user = action.payload;
+    },
+    setUserCard: (state, action: PayloadAction<string>) => {
+      state.user.card = action.payload;
     },
     setUserEmail: (state, action: PayloadAction<string>) => {
       state.user.email = action.payload;
@@ -95,6 +105,7 @@ export const auth = createSlice({
 export const {
   setUserEmail,
   setUserId,
+  setUserCard,
   logout,
   addToCart,
   setCart,
