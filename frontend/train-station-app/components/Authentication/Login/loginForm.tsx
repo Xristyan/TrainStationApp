@@ -7,8 +7,8 @@ import useInput from '@/hooks/use-input';
 import Image from 'next/image';
 import logo from '@/public/logo.png';
 import classes from './loginForm.module.scss';
-
-import { useDispatch } from 'react-redux';
+import useAuth from '@/hooks/use-auth';
+import useModal from '@/hooks/use-modal';
 
 /**
  *
@@ -16,8 +16,6 @@ import { useDispatch } from 'react-redux';
  * @returns {ReactElement}
  */
 const LoginForm = (props: any) => {
-  const dispatch = useDispatch();
-
   let formValid = true;
 
   const {
@@ -36,6 +34,7 @@ const LoginForm = (props: any) => {
     inputOnBlurHandler: passwordOnBlurHandler,
     reset: resetPassword
   } = useInput(passwordValidator);
+  const { login } = useAuth();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -46,7 +45,8 @@ const LoginForm = (props: any) => {
   }
 
   function loginFormHandler(e: any) {
-    console.log('yo');
+    e.preventDefault();
+    login({ email: enteredEmail, password: enteredPassword });
   }
 
   return (
