@@ -58,7 +58,7 @@ export const InfoContainer = ({ fields }: any) => {
         {tickets &&
           tickets.length !== 0 &&
           tickets.map((ticket, i) => {
-            return <TicketCard key={i} />;
+            return <TicketCard ticket={ticket} key={i} />;
           })}
       </section>
     </>
