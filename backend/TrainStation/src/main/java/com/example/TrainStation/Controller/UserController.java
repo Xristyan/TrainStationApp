@@ -18,6 +18,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @PostMapping("/getUserBy/email")
+    @CrossOrigin
     public User getUserByEmail(@RequestBody AuthenticationRequest request)
     {
         return userService.getUserByEmail(request);
