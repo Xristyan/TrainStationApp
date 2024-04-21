@@ -40,5 +40,7 @@ public class StationConnection {
     @Enumerated(EnumType.STRING)
     private TypeOfTravel typeOfTravel;
 
+    @Transient
+    private double price;
 
 }
