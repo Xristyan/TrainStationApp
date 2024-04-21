@@ -45,7 +45,7 @@ const RegisterForm = (props: any) => {
     inputOnBlurHandler: repeatedPasswordOnBlurHandler,
     reset: resetRepeatedPassword
   } = useInput(passwordsMatch.bind(null, enteredPassword));
-  const { register } = useAuth();
+  const { register, error } = useAuth();
 
   if (!isEmailValid || !isPasswordValid || !isRepeatedPasswordValid) {
     formValid = false;
@@ -66,7 +66,7 @@ const RegisterForm = (props: any) => {
 
   return (
     <>
-      {/* {error && <span className={classes.errorTopMessage}>{error}</span>} */}
+      {error && <span className={classes.errorTopMessage}>{error}</span>}
       <div className={classes.logoContainer}>
         <label>Register</label>
         <Image
