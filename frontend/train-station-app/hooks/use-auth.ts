@@ -12,7 +12,6 @@ export default function useAuth() {
   const dispatch = useAppDispatch<AppDispatch>();
   const { requestHandler } = useHttp();
   const user = useAppSelector((state) => state.authReducer.user);
-  const isLogged = useAppSelector((state) => state.authReducer.user.isLogged);
   const { closeModal } = useModal();
 
   const setJwtToken = (data: any) => {
