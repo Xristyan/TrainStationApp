@@ -1,9 +1,9 @@
-'use client';
-import classes from '@styles/trainStation/_train-station-container.module.scss';
-import { TrainStationForm } from '../TrainStationForm';
-import { TicketCard } from '../TicketCard/TickedCard';
-import { useCallback, useState } from 'react';
-import useHttp from '@/hooks/use-http';
+"use client";
+import classes from "@styles/trainStation/_train-station-container.module.scss";
+import { TrainStationForm } from "../TrainStationForm";
+import { TicketCard } from "../TicketCard/TickedCard";
+import { useCallback, useState } from "react";
+import useHttp from "@/hooks/use-http";
 
 export const InfoContainer = ({ fields }: any) => {
   const [tickets, setTickets] = useState([]);
@@ -24,27 +24,27 @@ export const InfoContainer = ({ fields }: any) => {
       typeOfTravel,
       hasChiled,
       childAge,
-      card
+      card,
     }: any) => {
-      if (stationFrom !== '' || stationTo !== '') {
-        console.log('test');
+      if (stationFrom !== "" || stationTo !== "") {
+        console.log("test");
         requestHandler(
           {
-            url: 'http://localhost:8080/connections',
-            method: 'POST',
+            url: "http://localhost:8080/connections",
+            method: "POST",
             body: {
-              stationFromName: stationFrom === '' ? null : stationFrom,
-              stationToName: stationTo === '' ? null : stationTo,
-              departureDateTime: departureTime === '' ? null : departureTime,
-              arrivalDateTime: arrivalTime === '' ? null : arrivalTime,
-              typeOfTravel: typeOfTravel === '' ? null : typeOfTravel,
+              stationFromName: stationFrom === "" ? null : stationFrom,
+              stationToName: stationTo === "" ? null : stationTo,
+              departureDateTime: departureTime === "" ? null : departureTime,
+              arrivalDateTime: arrivalTime === "" ? null : arrivalTime,
+              typeOfTravel: typeOfTravel === "" ? null : typeOfTravel,
               hasChiled,
               childAge,
-              card
+              card,
             },
             headers: {
-              'Content-Type': 'application/json'
-            }
+              "Content-Type": "application/json",
+            },
           },
           ticketsHandler
         );
@@ -60,11 +60,11 @@ export const InfoContainer = ({ fields }: any) => {
         searchFields={fields}
       />
       <section className={classes.ticketsContainer}>
-        {isLoading && '...Loding'}
+        {isLoading && "...Loding"}
         {tickets &&
           tickets.length !== 0 &&
           tickets.map((ticket, i) => {
-            return <TicketCard key={i} />;
+            return <TicketCard ticket={ticket} key={i} />;
           })}
       </section>
     </>
