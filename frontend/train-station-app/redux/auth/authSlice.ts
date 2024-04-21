@@ -7,6 +7,8 @@ type InitialState = {
     cart: Cart[];
     id: number | null;
     card: string | null;
+    hasChild: boolean;
+    childAge: number | null;
   };
 };
 
@@ -15,7 +17,9 @@ const initialState: InitialState = {
     email: '',
     cart: [],
     id: null,
-    card: null
+    card: null,
+    hasChild: false,
+    childAge: null
   }
 };
 
@@ -35,10 +39,19 @@ export const auth = createSlice({
         card: string;
       }>
     ) => {
-      state.user = action.payload;
+      state.user.email = action.payload.email;
+      state.user.cart = action.payload.cart;
+      state.user.id = action.payload.id;
+      state.user.card = action.payload.card;
     },
     setUserCard: (state, action: PayloadAction<string>) => {
       state.user.card = action.payload;
+    },
+    setHasChild: (state, action: PayloadAction<boolean>) => {
+      state.user.hasChild = action.payload;
+    },
+    setChildAge: (state, action: PayloadAction<number>) => {
+      state.user.childAge = action.payload;
     },
     setUserEmail: (state, action: PayloadAction<string>) => {
       state.user.email = action.payload;
@@ -106,9 +119,11 @@ export const {
   setUserEmail,
   setUserId,
   setUserCard,
+  setCart,
+  setHasChild,
+  setChildAge,
   logout,
   addToCart,
-  setCart,
   deleteFromCart,
   removeFromCart
 } = auth.actions;

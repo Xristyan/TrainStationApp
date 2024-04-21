@@ -3,7 +3,9 @@ import React, { FC, useEffect, useState } from 'react';
 import classes from '@styles/trainStation/_station-form.module.scss';
 import { Select } from '@/components/common/Select';
 import { Input } from '@/components/common/Input';
-import { useAppSelector } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { AppDispatch } from '@/redux/store';
+import { setChildAge, setHasChild } from '@/redux/auth/authSlice';
 
 type TrainStationFormProps = {
   searchFields: any;
@@ -19,9 +21,10 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
   const [departureTime, setDepartireTime] = useState('');
   const [arrivalTime, setArrivalTime] = useState('');
   const [typeOfTravel, setTypeOfTravel] = useState('');
-  const [hasChild, setHasChild] = useState(false);
-  const [childAge, setChiledAge] = useState(0);
+  const dispatch = useAppDispatch<AppDispatch>();
   const card = useAppSelector((state) => state.authReducer.user.card);
+  const hasChild = useAppSelector((state) => state.authReducer.user.hasChild);
+  const childAge = useAppSelector((state) => state.authReducer.user.childAge);
 
   useEffect(() => {
     searchFieldsHandler({
@@ -118,14 +121,14 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
           label='With child'
           value={hasChild}
           onChange={(e) => {
-            setHasChild(e.target.checked);
+            dispatch(setHasChild(e.target.value));
           }}
           className={classes['input-6']}
         />
         {hasChild && (
           <Select
             onChange={(e) => {
-              setChiledAge(e.target.value);
+              dispatch(setChildAge(e.target.value));
             }}
             value={childAge}
             options={Array.from(Array(71).keys())}
