@@ -3,7 +3,6 @@ import React, { FC, useEffect, useState } from "react";
 import classes from "@styles/trainStation/_station-form.module.scss";
 import { Select } from "@/components/common/Select";
 import { Input } from "@/components/common/Input";
-import useHttp from "@/hooks/use-http";
 
 type TrainStationFormProps = {
   searchFields: any;
@@ -19,6 +18,8 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
   const [departureTime, setDepartireTime] = useState("");
   const [arrivalTime, setArrivalTime] = useState("");
   const [typeOfTravel, setTypeOfTravel] = useState("");
+  const [hasChild, setHasChild] = useState(false);
+  const [childAge, setChiledAge] = useState(0);
 
   useEffect(() => {
     searchFieldsHandler({
@@ -27,6 +28,8 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
       departureTime,
       arrivalTime,
       typeOfTravel,
+      hasChild,
+      childAge,
     });
   }, [
     stationFrom,
@@ -34,6 +37,8 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
     departureTime,
     arrivalTime,
     typeOfTravel,
+    hasChild,
+    childAge,
     searchFieldsHandler,
   ]);
 
@@ -45,6 +50,9 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
     }
     return searchFields.stations;
   };
+  useEffect(() => {
+    console.log(hasChild);
+  }, [hasChild]);
 
   return (
     <section className={classes.container}>
@@ -101,6 +109,27 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
           className={classes["input-5"]}
           defaultMessage="Choose way of travel"
         />
+        <Input
+          type="checkbox"
+          label="With child"
+          value={hasChild}
+          onChange={(e) => {
+            setHasChild(e.target.checked);
+          }}
+          className={classes["input-6"]}
+        />
+        {hasChild && (
+          <Select
+            onChange={(e) => {
+              setChiledAge(e.target.value);
+            }}
+            value={childAge}
+            options={Array.from(Array(71).keys())}
+            label="Age"
+            className={classes["input-7"]}
+            defaultMessage="Age"
+          />
+        )}
       </form>
     </section>
   );

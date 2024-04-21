@@ -21,6 +21,8 @@ export const InfoContainer = ({ fields }) => {
       departureTime,
       arrivalTime,
       typeOfTravel,
+      hasChiled,
+      childAge,
     }: any) => {
       if (stationFrom !== "" || stationTo !== "") {
         console.log("test");
@@ -34,6 +36,8 @@ export const InfoContainer = ({ fields }) => {
               departureDateTime: departureTime === "" ? null : departureTime,
               arrivalDateTime: arrivalTime === "" ? null : arrivalTime,
               typeOfTravel: typeOfTravel === "" ? null : typeOfTravel,
+              hasChiled,
+              childAge,
             },
             headers: {
               "Content-Type": "application/json",
@@ -59,14 +63,6 @@ export const InfoContainer = ({ fields }) => {
           tickets.map((ticket, i) => {
             return <TicketCard key={i} />;
           })}
-        {/* <TicketCard />
-        <TicketCard />
-        <TicketCard />
-        <TicketCard />
-        <TicketCard />
-        <TicketCard />
-        <TicketCard />
-        <TicketCard /> */}
       </section>
     </>
   );
