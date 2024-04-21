@@ -50,11 +50,20 @@ export default function useCart() {
 
   function addToCart() {
     // TODO: add to cart
+    );
   }
 
   function removeFromCart() {
     // TODO: remove from cart
   }
 
-  return { cart, getCart, addToCart, removeFromCart, error };
+  function getCartLength(): number {
+    return cart.reduce(
+      (prevCartItem: number, cartItem: Cart) =>
+        prevCartItem + cartItem.quantity,
+      0
+    );
+  }
+
+  return { cart, getCart, addToCart, removeFromCart, getCartLength, error };
 }
