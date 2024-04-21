@@ -1,13 +1,13 @@
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { AppDispatch } from '@/redux/store';
-import useHttp from './use-http';
-import { Cart } from '@/types/cart';
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { AppDispatch } from "@/redux/store";
+import useHttp from "./use-http";
+import { Cart } from "@/types/cart";
 import {
   setCart,
   addToCart as addToCartSlice,
   removeFromCart as removeFromCartSlice,
-  deleteFromCart as deleteFromCartSlice
-} from '@/redux/auth/authSlice';
+  deleteFromCart as deleteFromCartSlice,
+} from "@/redux/auth/authSlice";
 
 export default function useCart() {
   const dispatch = useAppDispatch<AppDispatch>();
@@ -36,13 +36,13 @@ export default function useCart() {
 
     requestHandler(
       {
-        url: 'http://localhost:8080/user/getUserBy/email',
+        url: "http://localhost:8080/user/getUserBy/email",
         body: { email: user.email },
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('jwtToken')
-        }
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwtToken"),
+        },
       },
       handleGetCartSucces
     );
@@ -50,7 +50,6 @@ export default function useCart() {
 
   function addToCart() {
     // TODO: add to cart
-    );
   }
 
   function removeFromCart() {
