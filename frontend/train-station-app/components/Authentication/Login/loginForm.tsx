@@ -34,7 +34,7 @@ const LoginForm = (props: any) => {
     inputOnBlurHandler: passwordOnBlurHandler,
     reset: resetPassword
   } = useInput(passwordValidator);
-  const { login } = useAuth();
+  const { login, error } = useAuth();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -51,7 +51,7 @@ const LoginForm = (props: any) => {
 
   return (
     <>
-      {/* {error && <span className={classes.errorTopMessage}>{error}</span>} */}
+      {error && <span className={classes.errorTopMessage}>{error}</span>}
       <div className={classes.logoContainer}>
         <label>Login</label>
         <Image
