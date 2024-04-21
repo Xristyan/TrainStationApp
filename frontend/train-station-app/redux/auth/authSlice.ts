@@ -8,7 +8,7 @@ type InitialState = {
     id: number | null;
     card: string | null;
     hasChild: boolean;
-    childAge: number | null;
+    childAge: number | string;
   };
 };
 
@@ -19,7 +19,7 @@ const initialState: InitialState = {
     id: null,
     card: null,
     hasChild: false,
-    childAge: null
+    childAge: ''
   }
 };
 

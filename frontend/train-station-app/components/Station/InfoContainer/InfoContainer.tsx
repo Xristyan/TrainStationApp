@@ -21,10 +21,7 @@ export const InfoContainer = ({ fields }: any) => {
       stationTo,
       departureTime,
       arrivalTime,
-      typeOfTravel,
-      hasChiled,
-      childAge,
-      card
+      typeOfTravel
     }: any) => {
       if (stationFrom !== '' || stationTo !== '') {
         console.log('test');
@@ -37,10 +34,7 @@ export const InfoContainer = ({ fields }: any) => {
               stationToName: stationTo === '' ? null : stationTo,
               departureDateTime: departureTime === '' ? null : departureTime,
               arrivalDateTime: arrivalTime === '' ? null : arrivalTime,
-              typeOfTravel: typeOfTravel === '' ? null : typeOfTravel,
-              hasChiled,
-              childAge,
-              card
+              typeOfTravel: typeOfTravel === '' ? null : typeOfTravel
             },
             headers: {
               'Content-Type': 'application/json'

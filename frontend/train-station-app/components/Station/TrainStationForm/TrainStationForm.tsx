@@ -32,10 +32,7 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
       stationTo,
       departureTime,
       arrivalTime,
-      typeOfTravel,
-      hasChild,
-      childAge,
-      card
+      typeOfTravel
     });
   }, [
     stationFrom,
@@ -43,10 +40,7 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
     departureTime,
     arrivalTime,
     typeOfTravel,
-    hasChild,
-    childAge,
-    searchFieldsHandler,
-    card
+    searchFieldsHandler
   ]);
 
   const filterStationsFieldsHandler = (valueToExclude: string) => {
@@ -57,9 +51,6 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
     }
     return searchFields.stations;
   };
-  useEffect(() => {
-    console.log(hasChild);
-  }, [hasChild]);
 
   return (
     <section className={classes.container}>
@@ -121,7 +112,7 @@ export const TrainStationForm: FC<TrainStationFormProps> = ({
           label='With child'
           value={hasChild}
           onChange={(e) => {
-            dispatch(setHasChild(e.target.value));
+            dispatch(setHasChild(e.target.checked));
           }}
           className={classes['input-6']}
         />
