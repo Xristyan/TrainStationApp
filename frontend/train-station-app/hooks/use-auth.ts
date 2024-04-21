@@ -1,6 +1,8 @@
 import {
-  setUserCredentials,
-  logout as logoutSlice
+  setUserEmail,
+  logout as logoutSlice,
+  setCart,
+  setUserId
 } from '@/redux/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { AppDispatch } from '@/redux/store';
@@ -13,9 +15,26 @@ export default function useAuth() {
   const user = useAppSelector((state) => state.authReducer.user);
   const { closeModal } = useModal();
 
-  const handleSuccess = (data: any) => {
+  const handleSuccess = (email: string, data: any) => {
     if (!data) return;
     localStorage.setItem('jwtToken', data.token);
+
+    requestHandler(
+      {
+        url: 'http://localhost:8080/user/getUserBy/email',
+        body: { email: email },
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + data.token
+        }
+      },
+      (data: any) => {
+        dispatch(setCart(data.cart));
+        dispatch(setUserId(data.id));
+      }
+    );
+
     closeModal();
   };
 
@@ -29,10 +48,10 @@ export default function useAuth() {
           'Content-Type': 'application/json'
         }
       },
-      handleSuccess
+      handleSuccess.bind(null, loginData.email)
     );
 
-    dispatch(setUserCredentials(loginData.email));
+    dispatch(setUserEmail(loginData.email));
   }
 
   async function logout() {
@@ -53,7 +72,7 @@ export default function useAuth() {
       handleSuccess
     );
 
-    dispatch(setUserCredentials(registerData.email));
+    dispatch(setUserEmail(registerData.email));
   }
 
   return { user, login, logout, register, error };
