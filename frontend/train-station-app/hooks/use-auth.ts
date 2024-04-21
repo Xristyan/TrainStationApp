@@ -11,10 +11,12 @@ export default function useAuth() {
   const dispatch = useAppDispatch<AppDispatch>();
   const { requestHandler, error } = useHttp();
   const user = useAppSelector((state) => state.authReducer.user);
+  const { closeModal } = useModal();
 
-  const setJwtToken = (data: any) => {
+  const handleSuccess = (data: any) => {
     if (!data) return;
     localStorage.setItem('jwtToken', data.token);
+    closeModal();
   };
 
   async function login(loginData: any) {
@@ -27,7 +29,7 @@ export default function useAuth() {
           'Content-Type': 'application/json'
         }
       },
-      setJwtToken
+      handleSuccess
     );
 
     dispatch(setUserCredentials(loginData.email));
@@ -48,7 +50,7 @@ export default function useAuth() {
           'Content-Type': 'application/json'
         }
       },
-      setJwtToken
+      handleSuccess
     );
 
     dispatch(setUserCredentials(registerData.email));

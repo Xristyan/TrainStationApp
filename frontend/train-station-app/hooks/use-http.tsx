@@ -5,7 +5,6 @@ import useModal from './use-modal';
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { closeModal } = useModal();
 
   const requestHandler = useCallback(async function (
     requestConfig: any,
@@ -29,7 +28,6 @@ const useHttp = () => {
       if (applyData) {
         applyData(data);
       }
-      closeModal();
     } catch (err: any) {
       setError(err.message || 'Something went wrong!');
     }
