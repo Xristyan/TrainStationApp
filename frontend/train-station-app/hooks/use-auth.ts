@@ -69,7 +69,7 @@ export default function useAuth() {
           'Content-Type': 'application/json'
         }
       },
-      handleSuccess
+      handleSuccess.bind(null, registerData.email)
     );
 
     dispatch(setUserEmail(registerData.email));
