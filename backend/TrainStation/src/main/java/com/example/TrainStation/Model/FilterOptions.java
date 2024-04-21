@@ -23,10 +23,4 @@ public class FilterOptions {
 
     private TypeOfTravel typeOfTravel;
 
-    private boolean hasChild;
-
-    private int childAge;
-
-    private CardType cardType;
-
 }
