@@ -1,24 +1,33 @@
 import classes from "@styles/trainStation/_ticked-card.module.scss";
 export const TicketCard = ({
-  typeOfTravel,
-  toStation,
-  fromStation,
-  arrivalDateTime,
-  departureDateTime,
-  distance,
-  price,
+  ticket: {
+    fromStation,
+    toStation,
+    departureDateTime,
+    arrivalDateTime,
+    price,
+    typeOfTravel,
+  },
 }) => {
+  const departure = new Date(departureDateTime);
+  const arrival = new Date(arrivalDateTime);
   return (
     <div className={classes.tickedCard}>
       <section className={classes.tickedInfo}>
-        <label>Name</label>
+        <label>
+          from: {fromStation && fromStation.name} to:{" "}
+          {toStation && toStation.name}
+        </label>
         <div>
-          <span>14:00</span>-<span>17:00</span>
-          <span>Direct</span>
-          <div>Price</div>
+          <div>
+            {departure.getHours()} - {arrival.getHours()}
+          </div>
+          <div>Type: {typeOfTravel}</div>
+          <div>Price: {price}$ </div>
         </div>
       </section>
       <section className={classes.tickedMap}>map</section>
+      <button className={classes.button}>Buy Ticket</button>
     </div>
   );
 };
