@@ -2,33 +2,88 @@ import {
   setUserCredentials,
   logout as logoutSlice
 } from '@/redux/auth/authSlice';
-import { useAppSelector } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { AppDispatch } from '@/redux/store';
 import { useDispatch } from 'react-redux';
 import useHttp from './use-http';
+import useModal from './use-modal';
 
 export default function useAuth() {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch<AppDispatch>();
   const { requestHandler } = useHttp();
   const user = useAppSelector((state) => state.authReducer.user);
+  const isLogged = useAppSelector((state) => state.authReducer.user.isLogged);
+  const { closeModal } = useModal();
+
+  const setJwtToken = (data: any) => {
+    if (!data) return;
+    localStorage.setItem('jwtToken', data.token);
+  };
 
   async function login(loginData: any) {
-    // TODO: add request
+    try {
+      await requestHandler(
+        {
+          url: 'http://localhost:8080/api/auth/authentication',
+          body: { email: loginData.email, password: loginData.password },
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        },
+        setJwtToken
+      );
 
-    dispatch(setUserCredentials(loginData.email));
+      await dispatch(setUserCredentials(loginData.email));
+      closeModal();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function logout() {
-    // TODO: add request
-
     dispatch(logoutSlice());
+    localStorage.removeItem('jwtToken');
   }
 
   async function register(registerData: any) {
-    // TODO: add request
+    try {
+      await requestHandler(
+        {
+          url: 'http://localhost:8080/api/auth/register',
+          body: { email: registerData.email, password: registerData.password },
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        },
+        setJwtToken
+      );
 
-    dispatch(setUserCredentials(registerData.email));
+      await dispatch(setUserCredentials(registerData.email));
+      closeModal();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  return { user, login, logout, register };
+  return { user, login, logout, register, isLogged };
 }
+
+// requestHandler(
+//   {
+//     url: 'http://localhost:8080/user/getUserBy/email',
+//     body: { email: data.email },
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       Authorization: 'Bearer ' + localStorage.getItem('jwtToken')
+//     }
+//   },
+//   userDataHandler
+// );
+
+// const userDataHandler = (data: any) => {
+//   if (!data) return;
+//   dispatch(setUserCredentials(data));
+// };
