@@ -3,10 +3,7 @@ import { ProfileIcon } from '@/components/icons/ProfileIcon/ProfileIcon';
 import Link from 'next/link';
 import useAuth from '@/hooks/use-auth';
 import useModal from '@/hooks/use-modal';
-
-function isLogged() {
-  return localStorage.getItem('jwtToken') ? true : false;
-}
+import { isLogged } from '@/utils/auth';
 
 const ProfileButton = () => {
   const loggedIn = isLogged();

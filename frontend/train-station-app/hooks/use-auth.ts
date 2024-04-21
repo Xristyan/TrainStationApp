@@ -66,7 +66,7 @@ export default function useAuth() {
     }
   }
 
-  return { user, login, logout, register, isLogged };
+  return { user, login, logout, register };
 }
 
 // requestHandler(
